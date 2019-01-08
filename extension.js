@@ -16,22 +16,39 @@ function activate(context) {
 	// This line of code will only be executed once when your extension is activated
 	console.log('Congratulations, your extension "open-in-gitup" is now active!');
 
-	// The command has been defined in the package.json file
-	// Now provide the implementation of the command with  registerCommand
-	// The commandId parameter must match the command field in package.json
-	let disposable = vscode.commands.registerCommand('extension.openInGitup', function () {
-		// The code you place here will be executed every time your command is executed
+	const execGitup = function (view='') {
 		const fileDir = path.dirname(vscode.window.activeTextEditor.document.fileName);
-		const script = `cd ${fileDir} && gitup`;
-		cp.exec(script, function(error, stdout, stderr) {
+		console.log(`Opening Gitup in ${fileDir}…`);
+
+		const cmd = `cd ${fileDir} && gitup ${view}`;
+		cp.exec(cmd, function (error) {
 			if (error) {
 				console.error(`exec error: ${error}`);
 				return;
 			}
 		});
+	};
+
+	// The command has been defined in the package.json file
+	// Now provide the implementation of the command with registerCommand
+	// The commandId parameter must match the command field in package.json
+	const open = vscode.commands.registerCommand('extension.openInGitup', function () {
+		execGitup();
 	});
 
-	context.subscriptions.push(disposable);
+	const map = vscode.commands.registerCommand('extension.openInGitupMap', function () {
+		execGitup('map');
+	});
+
+	const commit = vscode.commands.registerCommand('extension.openInGitupCommit', function () {
+		execGitup('commit');
+	});
+
+	const view = vscode.commands.registerCommand('extension.openInGitupStash', function () {
+		execGitup('stash');
+	});
+
+	context.subscriptions.push(open, map, commit, view);
 }
 exports.activate = activate;
 

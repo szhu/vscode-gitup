@@ -10,14 +10,29 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:extension.openInGitup"
+		"onCommand:extension.openInGitup",
+		"onCommand:extension.openInGitupMap",
+		"onCommand:extension.openInGitupCommit",
+		"onCommand:extension.openInGitupStash"
 	],
 	"main": "./extension.js",
 	"contributes": {
 		"commands": [
 			{
 				"command": "extension.openInGitup",
-				"title": "Open In Gitup"
+				"title": "Open in Gitup"
+			},
+			{
+				"command": "extension.openInGitupMap",
+				"title": "Open in Gitup: Map View"
+			},
+			{
+				"command": "extension.openInGitupCommit",
+				"title": "Open in Gitup: Commit view"
+			},
+			{
+				"command": "extension.openInGitupStash",
+				"title": "Open in Gitup: Stash View"
 			}
 		]
 	},
