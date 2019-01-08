@@ -34,6 +34,12 @@
 				"command": "extension.openInGitupStash",
 				"title": "Open in Gitup: Stash View"
 			}
+		],
+		"keybindings": [
+			{
+				"key": "ctrl+alt+g",
+				"command": "extension.openInGitup"
+			}
 		]
 	},
 	"scripts": {
