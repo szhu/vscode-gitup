@@ -18,7 +18,7 @@ function activate(context) {
 
 	const execGitup = function (view='') {
 		const fileDir = path.dirname(vscode.window.activeTextEditor.document.fileName);
-		console.log(`Opening Gitup in ${fileDir}…`);
+		console.log(`Opening GitUp in ${fileDir}…`);
 
 		const cmd = `cd ${fileDir} && gitup ${view}`;
 		cp.exec(cmd, function (error) {
@@ -32,19 +32,19 @@ function activate(context) {
 	// The command has been defined in the package.json file
 	// Now provide the implementation of the command with registerCommand
 	// The commandId parameter must match the command field in package.json
-	const open = vscode.commands.registerCommand('extension.openInGitup', function () {
+	const open = vscode.commands.registerCommand('extension.openInGitUp', function () {
 		execGitup();
 	});
 
-	const map = vscode.commands.registerCommand('extension.openInGitupMap', function () {
+	const map = vscode.commands.registerCommand('extension.openInGitUpMap', function () {
 		execGitup('map');
 	});
 
-	const commit = vscode.commands.registerCommand('extension.openInGitupCommit', function () {
+	const commit = vscode.commands.registerCommand('extension.openInGitUpCommit', function () {
 		execGitup('commit');
 	});
 
-	const view = vscode.commands.registerCommand('extension.openInGitupStash', function () {
+	const view = vscode.commands.registerCommand('extension.openInGitUpStash', function () {
 		execGitup('stash');
 	});
 

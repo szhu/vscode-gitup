@@ -1,7 +1,7 @@
 {
 	"name": "open-in-gitup",
-	"displayName": "Open in Gitup",
-	"description": "Open the current repository in Gitup",
+	"displayName": "Open in GitUp",
+	"description": "Open the current repository in GitUp",
 	"version": "0.0.1",
 	"engines": {
 		"vscode": "^1.30.0"
@@ -10,35 +10,35 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:extension.openInGitup",
-		"onCommand:extension.openInGitupMap",
-		"onCommand:extension.openInGitupCommit",
-		"onCommand:extension.openInGitupStash"
+		"onCommand:extension.openInGitUp",
+		"onCommand:extension.openInGitUpMap",
+		"onCommand:extension.openInGitUpCommit",
+		"onCommand:extension.openInGitUpStash"
 	],
 	"main": "./extension.js",
 	"contributes": {
 		"commands": [
 			{
-				"command": "extension.openInGitup",
-				"title": "Open in Gitup"
+				"command": "extension.openInGitUp",
+				"title": "Open in GitUp"
 			},
 			{
-				"command": "extension.openInGitupMap",
-				"title": "Open in Gitup: Map View"
+				"command": "extension.openInGitUpMap",
+				"title": "Open in GitUp: Map View"
 			},
 			{
-				"command": "extension.openInGitupCommit",
-				"title": "Open in Gitup: Commit view"
+				"command": "extension.openInGitUpCommit",
+				"title": "Open in GitUp: Commit View"
 			},
 			{
-				"command": "extension.openInGitupStash",
-				"title": "Open in Gitup: Stash View"
+				"command": "extension.openInGitUpStash",
+				"title": "Open in GitUp: Stash View"
 			}
 		],
 		"keybindings": [
 			{
 				"key": "ctrl+alt+g",
-				"command": "extension.openInGitup"
+				"command": "extension.openInGitUp"
 			}
 		]
 	},
