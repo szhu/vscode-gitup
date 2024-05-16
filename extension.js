@@ -4,6 +4,11 @@ const vscode = require('vscode');
 const cp = require('child_process');
 const path = require('path');
 
+/**
+ * @type {string | undefined}
+ */
+let lastDir;
+
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
 
@@ -16,11 +21,29 @@ function activate(context) {
 	// This line of code will only be executed once when your extension is activated
 	console.log('Congratulations, your extension "open-in-gitup" is now active!');
 
-	const execGitup = function (view='') {
-		const fileDir = path.dirname(vscode.window.activeTextEditor.document.fileName);
-		console.log(`Opening GitUp in ${fileDir}…`);
+	const execGitup = async function (view='') {
+		let dir;
+		if (vscode.window.activeTextEditor) {
+			// Use the current file's directory, if possible.
+			dir = path.dirname(vscode.window.activeTextEditor.document.uri.fsPath);
+		} else if (vscode.workspace.workspaceFolders?.length === 1) {
+			// Otherwise, use the workspace root, if there is only one.
+			dir = vscode.workspace.workspaceFolders[0].uri.fsPath;
+		} else if (lastDir) {
+			// If there are multiple workspaces, use the last-used one.
+			dir = lastDir
+		} else {
+			// Otherwise, let the user pick which workspace root to use.
+			const pickedDir = await vscode.window.showWorkspaceFolderPick();
+			if (!pickedDir) return;
 
-		const cmd = `cd ${fileDir} && gitup ${view}`;
+			dir = pickedDir.uri.fsPath;
+		}
+
+		lastDir = dir;
+
+		console.log(`Opening GitUp in ${dir}…`);
+		const cmd = `cd ${dir} && gitup ${view}`;
 		cp.exec(cmd, function (error) {
 			if (error) {
 				console.error(`exec error: ${error}`);
@@ -50,7 +73,6 @@ function activate(context) {
 
 	context.subscriptions.push(open, map, commit, view);
 }
-exports.activate = activate;
 
 // this method is called when your extension is deactivated
 function deactivate() {}
